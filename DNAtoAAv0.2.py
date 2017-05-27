@@ -15,22 +15,22 @@ Nucleotidi = ['T', 'C', 'A', 'G']
 
 #Dizionario che traduce le triplette nucleotidiche in aminoacidi
 Dna_to_AA = {
-"TTT": "Phe", "TTC": "Phe", "TTA": "Leu", "TTG": "Leu", "CTT": "Leu",
- "CTC": "Leu", "CTA": "Leu", "CTG": "Leu", "ATT": "Ile", "ATC": "Ile",
-  "ATA": "Ile", "ATG": "Met", "GTT": "Val", "GTC": "Val", "GTA": "Val",
-   "GTG": "Val", "TCT": "Ser", "TCC": "Ser", "TCA": "Ser", "TCG": "Ser",
-	"CCT": "Pro", "CCC": "Pro", "CCA": "Pro", "CCG": "Pro",
-	 "ACT": "Thr", "ACC": "Thr", "ACA": "Thr", "ACG": "Thr",
-	  "GCT": "Ala", "GCC": "Ala", "GCA": "Ala", "GCG": "Ala",
-	   "TAT": "Tyr", "TAC": "Tyr", "TAA": "STOP", "TAG": "STOP",
-		"CAT": "His", "CAC": "His", "CAA": "Gln", "CAG": "Gln",
-		 "AAT": "Asn", "AAC": "Asn", "AAA": "Lys", "AAG": "Lys",
-		  "GAT": "Asp", "GAC": "Asp", "GAA": "Glu", "GAG": "Glu",
-		   "TGT": "Cys", "TGC": "Cys", "TGA": "STOP", "TGG": "Trp",
-			"CGT": "Arg", "CGC": "Arg", "CGA": "Arg", "CGG": "Arg",
-			 "AGT": "Ser", "AGC": "Ser", "AGA": "Arg", "AGG": "Arg",
-			  "GGT": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly",
-			  }
+
+"TTT": "Phe", "TTC": "Phe", "TTA": "Leu", "TTG": "Leu", "CTT": "Leu", 
+"CTC": "Leu", "CTA": "Leu", "CTG": "Leu", "ATT": "Ile", "ATC": "Ile", 
+"ATA": "Ile", "ATG": "Met", "GTT": "Val", "GTC": "Val", "GTA": "Val", 
+"GTG": "Val", "TCT": "Ser", "TCC": "Ser", "TCA": "Ser", "TCG": "Ser", 
+"CCT": "Pro", "CCC": "Pro", "CCA": "Pro", "CCG": "Pro", "ACT": "Thr", 
+"ACC": "Thr", "ACA": "Thr", "ACG": "Thr", "GCT": "Ala", "GCC": "Ala", 
+"GCA": "Ala", "GCG": "Ala", "TAT": "Tyr", "TAC": "Tyr", "TAA": "STOP", 
+"TAG": "STOP", "CAT": "His", "CAC": "His", "CAA": "Gln", "CAG": "Gln", 
+"AAT": "Asn", "AAC": "Asn", "AAA": "Lys", "AAG": "Lys", "GAT": "Asp", 
+"GAC": "Asp", "GAA": "Glu", "GAG": "Glu", "TGT": "Cys", "TGC": "Cys", 
+"TGA": "STOP", "TGG": "Trp", "CGT": "Arg", "CGC": "Arg", "CGA": "Arg", 
+"CGG": "Arg", "AGT": "Ser", "AGC": "Ser", "AGA": "Arg", "AGG": "Arg", 
+"GGT": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly",
+}
+
 
 #Dizionario degli AA: scritti in 3 e 1 lettera
 AA1to3 = {
@@ -41,7 +41,6 @@ AA1to3 = {
 }	
 
 def main():
-	inizio() #bypassa il giochino casuale direttamente
 	scelta = ""
 
 	while not scelta:
@@ -199,4 +198,5 @@ def scambio(gene, filetxt):
 	return gene_mutato
 	
 if __name__ == "__main__":
-	main()
+	inizio() #bypassa il giochino casuale direttamente
+	#main()
