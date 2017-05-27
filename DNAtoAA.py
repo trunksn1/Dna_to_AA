@@ -15,22 +15,22 @@ Nucleotidi = ['T', 'C', 'A', 'G']
 
 #Dizionario che traduce le triplette nucleotidiche in aminoacidi
 Dna_to_AA = {
-"TTT": "Phe", "TTC": "Phe", "TTA": "Leu", "TTG": "Leu", "CTT": "Leu",
- "CTC": "Leu", "CTA": "Leu", "CTG": "Leu", "ATT": "Ile", "ATC": "Ile",
-  "ATA": "Ile", "ATG": "Met", "GTT": "Val", "GTC": "Val", "GTA": "Val",
-   "GTG": "Val", "TCT": "Ser", "TCC": "Ser", "TCA": "Ser", "TCG": "Ser",
-    "CCT": "Pro", "CCC": "Pro", "CCA": "Pro", "CCG": "Pro",
-     "ACT": "Thr", "ACC": "Thr", "ACA": "Thr", "ACG": "Thr",
-      "GCT": "Ala", "GCC": "Ala", "GCA": "Ala", "GCG": "Ala",
-       "TAT": "Tyr", "TAC": "Tyr", "TAA": "STOP", "TAG": "STOP",
-        "CAT": "His", "CAC": "His", "CAA": "Gln", "CAG": "Gln",
-         "AAT": "Asn", "AAC": "Asn", "AAA": "Lys", "AAG": "Lys",
-          "GAT": "Asp", "GAC": "Asp", "GAA": "Glu", "GAG": "Glu",
-           "TGT": "Cys", "TGC": "Cys", "TGA": "STOP", "TGG": "Trp",
-            "CGT": "Arg", "CGC": "Arg", "CGA": "Arg", "CGG": "Arg",
-             "AGT": "Ser", "AGC": "Ser", "AGA": "Arg", "AGG": "Arg",
-              "GGT": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly",
-              }
+
+"TTT": "Phe", "TTC": "Phe", "TTA": "Leu", "TTG": "Leu", "CTT": "Leu", 
+"CTC": "Leu", "CTA": "Leu", "CTG": "Leu", "ATT": "Ile", "ATC": "Ile", 
+"ATA": "Ile", "ATG": "Met", "GTT": "Val", "GTC": "Val", "GTA": "Val", 
+"GTG": "Val", "TCT": "Ser", "TCC": "Ser", "TCA": "Ser", "TCG": "Ser", 
+"CCT": "Pro", "CCC": "Pro", "CCA": "Pro", "CCG": "Pro", "ACT": "Thr", 
+"ACC": "Thr", "ACA": "Thr", "ACG": "Thr", "GCT": "Ala", "GCC": "Ala", 
+"GCA": "Ala", "GCG": "Ala", "TAT": "Tyr", "TAC": "Tyr", "TAA": "STOP", 
+"TAG": "STOP", "CAT": "His", "CAC": "His", "CAA": "Gln", "CAG": "Gln", 
+"AAT": "Asn", "AAC": "Asn", "AAA": "Lys", "AAG": "Lys", "GAT": "Asp", 
+"GAC": "Asp", "GAA": "Glu", "GAG": "Glu", "TGT": "Cys", "TGC": "Cys", 
+"TGA": "STOP", "TGG": "Trp", "CGT": "Arg", "CGC": "Arg", "CGA": "Arg", 
+"CGG": "Arg", "AGT": "Ser", "AGC": "Ser", "AGA": "Arg", "AGG": "Arg", 
+"GGT": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly",
+}
+
 
 #Dizionario degli AA: scritti in 3 e 1 lettera
 AA1to3 = {
@@ -39,6 +39,24 @@ AA1to3 = {
 "His": "H", "Lys": "K", "Ser": "S", "Thr": "T", "Cys": "C", "Met": "M",
 "Asn": "N", "Gln": "Q",
 }	
+
+def main():
+	scelta = ""
+
+	while not scelta:
+		
+		scelta = input("""\nSe vuoi giocare con una sequenza casuale scrivi 1, se hai un gene da tradurre scrivi 2: """)
+		if scelta == "1":
+			print("Hai scelto di giocare con la sequenza casuale!")
+			x = crea_gene()
+			print ("-".join(traduzione(x)))
+			continue		
+		elif scelta == "2":
+			print("Hai scelto di tradurre un gene!")
+			inizio()
+			continue		
+		else:
+			scelta = ""
 
 
 def crea_gene ():
@@ -59,11 +77,15 @@ def traduzione(gene):
 	tripletta = ""
 	y = len(gene)
 	for x in range(y):
+		if gene[x] == "!":
+			y -= 1
+			continue
 		tripletta = tripletta + gene[x] 
 		if len(tripletta) == 3:
 			print ("Tripletta: ", tripletta, "--->>", Dna_to_AA[tripletta])
 			if Dna_to_AA[tripletta] == "STOP":
 				print("Incontrato codone di STOP")
+				prot1.append('***')
 				break
 
 			#Dicitura a 3 lettere
@@ -90,7 +112,7 @@ def inizio():
 #entriamo nella cartella creata
 	os.chdir(cartella)
 #Crea il file nome_gene.txt nella cartella appena creata
-	gene = input("""Incolla la sequenza del gene (assicurati non ci siano spazi tra i nucleotidi)\n\n\n""").upper()	#si può provare a fargli leggere la sequenza da un file già esistente
+	gene = input("""Incolla la sequenza del gene\n\n\n""").upper().replace(" ","")	#si può provare a fargli leggere la sequenza da un file già esistente
 	miofile = (os.path.join(nome_gene + ".txt"))
 	x = open(miofile, 'a')
 	x.write('Sequenza di DNA del gene: ' + str(nome_gene) + ':\n\n')
@@ -127,7 +149,7 @@ def dup(gene, filetxt):
 	dove = int(input("posizione della dup\n"))
 	
 	#DOMANDA, la dup può essere anche più grande di un solo nucleotidie? il mio codice funziona anche per dup più grandi.
-	cosa = input("INCOLLA la sequenza duplicata\n").upper()
+	cosa = input("Inserisci la sequenza duplicata\n").upper()
 	
 	#Controllo che effettivamente la sequenza aggiunta sia composta da nucleotidi di DNA e non da cazzate
 	while not cosa:
@@ -138,7 +160,7 @@ def dup(gene, filetxt):
 				
 	#Scrittura del gene una volta mutato, la dup viene messa DOPO il nucleotide indicato
 	#es: scelta la posizione 5, i primi cinque nucleotidi saranno uguali, poi ci sarà la dup, e poi tutto il resto
-	gene_mutato = gene[:(dove-1)] + cosa + gene[(dove-1):]
+	gene_mutato = gene[:(dove-1)] + "!" + cosa + "!" + gene[(dove-1):]
 	
 	filetxt.write('\n\n\n\nMUTAZIONE!!!! : c.' + str(dove) + 'dup' + str(cosa) + '\n\nNuova Sequenza del Gene:\n\n')
 	filetxt.write(gene_mutato)
@@ -151,7 +173,7 @@ def dlz(gene, filetxt):
 	fine = int(input("ultimo nucleotide deleto\n"))
 	if inizio == fine:
 		fine += 1
-		gene_mutato = gene[: (inizio)] + gene[(fine):]
+		gene_mutato = gene[: (inizio)] + "!" + gene[(fine):]
 	else:
 		gene_mutato = gene[: (inizio-1)] + gene[fine:]
 	
@@ -168,32 +190,13 @@ def scambio(gene, filetxt):
 	
 	nuovo = input("nuovo nucleotide\n").upper()
 	
-	gene_mutato = gene[:(posizione-1)] + nuovo + gene[posizione:]
+	gene_mutato = gene[:(posizione-1)] + "!" + nuovo + "!" + gene[posizione:]
 	
 	filetxt.write('\n\n\n\nMUTAZIONE!!!! : c.' + str(posizione) + str(originale) + '>' + str(nuovo) + '\n\nNuova Sequenza del Gene:\n\n')
 	filetxt.write(gene_mutato)
 	filetxt.write('\n\nNuova proteina\n\n')
 	return gene_mutato
 	
-	
-	
-	
-scelta = ""
-
-while not scelta:
-	scelta = input("""\nSe vuoi giocare con una sequenza casuale scrivi 1,
-se hai un gene da tradurre scrivi 2 \n""")
-	if scelta == "1":
-		print("Hai scelto di giocare con la sequenza casuale!")
-		x = crea_gene()
-		print ("-".join(traduzione(x)))
-		continue		
-	elif scelta == "2":
-		print("Hai scelto di tradurre un gene!")
-		inizio()
-		continue		
-	else:
-		scelta = ""
-		 
-
-	
+if __name__ == "__main__":
+	inizio() #bypassa il giochino casuale direttamente
+	#main()
