@@ -3,6 +3,9 @@
 #scritto e ideato dal Dr. Taurino Jacopo specializzando esaurito
 #in genetica medica.
 
+#PROTEINA A 1 LETTERA
+#CORREZIONE POSIZIONE DUP
+
 #Solo per giocare con sequenze casuali
 from random import randint
 import os
@@ -52,6 +55,7 @@ def crea_gene ():
 #Accetta il gene che sia espresso come Lista che come stringa!
 def traduzione(gene):
 	proteina = []
+	prot1 = []
 	tripletta = ""
 	y = len(gene)
 	for x in range(y):
@@ -61,13 +65,19 @@ def traduzione(gene):
 			if Dna_to_AA[tripletta] == "STOP":
 				print("Incontrato codone di STOP")
 				break
+
+			#Dicitura a 3 lettere
 			proteina.append(Dna_to_AA[tripletta])
+			#Dicitura a 1 lettera
+			popaa= proteina.pop()
+			prot1.append(AA1to3[popaa])
+			
 			tripletta = ""
 	if type(gene) == list:
-		return proteina
+		return prot1
 	else:
-		proteina = "-".join(proteina)
-		return proteina
+		prot1 = "-".join(prot1)
+		return prot1
 			
 def inizio():
 	nome_gene = input("Come si chiama il gene che vuoi tradurre?\n")
@@ -128,7 +138,7 @@ def dup(gene, filetxt):
 				
 	#Scrittura del gene una volta mutato, la dup viene messa DOPO il nucleotide indicato
 	#es: scelta la posizione 5, i primi cinque nucleotidi saranno uguali, poi ci sarà la dup, e poi tutto il resto
-	gene_mutato = gene[:dove] + cosa + gene[dove:]
+	gene_mutato = gene[:(dove-1)] + cosa + gene[(dove-1):]
 	
 	filetxt.write('\n\n\n\nMUTAZIONE!!!! : c.' + str(dove) + 'dup' + str(cosa) + '\n\nNuova Sequenza del Gene:\n\n')
 	filetxt.write(gene_mutato)
