@@ -15,6 +15,7 @@ Nucleotidi = ['T', 'C', 'A', 'G']
 
 #Dizionario che traduce le triplette nucleotidiche in aminoacidi
 Dna_to_AA = {
+
 "TTT": "Phe", "TTC": "Phe", "TTA": "Leu", "TTG": "Leu", "CTT": "Leu", 
 "CTC": "Leu", "CTA": "Leu", "CTG": "Leu", "ATT": "Ile", "ATC": "Ile", 
 "ATA": "Ile", "ATG": "Met", "GTT": "Val", "GTC": "Val", "GTA": "Val", 
@@ -29,6 +30,7 @@ Dna_to_AA = {
 "CGG": "Arg", "AGT": "Ser", "AGC": "Ser", "AGA": "Arg", "AGG": "Arg", 
 "GGT": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly",
 }
+
 
 #Dizionario degli AA: scritti in 3 e 1 lettera
 AA1to3 = {
